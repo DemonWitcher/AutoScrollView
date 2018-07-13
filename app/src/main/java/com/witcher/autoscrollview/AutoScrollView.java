@@ -155,7 +155,7 @@ public class AutoScrollView extends ViewGroup {
         int count = mAdapter.getCount();
         for (int i = 0; i < mViewCount; ++i) {// 0 1
             View view = layoutInflater.inflate(mAdapter.getLayoutId(), this,false);
-            addView(view,view.getLayoutParams());
+            addViewInLayout(view,-1,view.getLayoutParams());
             mViewList.add(view);
             if (i < count) {
                 mAdapter.bindView(mIndex, view);
