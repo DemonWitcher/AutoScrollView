@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void bindView(int position, View view) {
+            public void bindView(final int position, View view) {
                 TextView tv1 = view.findViewById(R.id.tv1);
                 TextView tv2 = view.findViewById(R.id.tv2);
                 tv1.setText(getItem(position).s1);
@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void bindView(int position, View view) {
+            public void bindView(final int position, View view) {
                 TextView tv1 = view.findViewById(R.id.tv1);
                 TextView tv2 = view.findViewById(R.id.tv2);
                 tv1.setText(getItem(position).s1);
@@ -155,8 +155,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 autoScrollView.test1();
-                autoScrollView2.test1();
-                autoScrollView3.test1();
+//                autoScrollView2.test1();
+//                autoScrollView3.test1();
             }
         });
         findViewById(R.id.bt2).setOnClickListener(new View.OnClickListener() {

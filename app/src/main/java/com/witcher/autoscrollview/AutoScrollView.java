@@ -154,9 +154,8 @@ public class AutoScrollView extends ViewGroup {
         LayoutInflater layoutInflater = LayoutInflater.from(getContext());
         int count = mAdapter.getCount();
         for (int i = 0; i < mViewCount; ++i) {// 0 1
-            View view = layoutInflater.inflate(mAdapter.getLayoutId(), null);
-            //这里高度给一个具体数字  子view就是那个宽度了或者在item_view.xml里给minHeight
-            addView(view, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+            View view = layoutInflater.inflate(mAdapter.getLayoutId(), this,false);
+            addView(view,view.getLayoutParams());
             mViewList.add(view);
             if (i < count) {
                 mAdapter.bindView(mIndex, view);
