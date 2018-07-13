@@ -164,6 +164,7 @@ public class AutoScrollView extends ViewGroup {
                 view.setVisibility(View.INVISIBLE);
             }
         }
+//        requestLayout();
 
     }
 
