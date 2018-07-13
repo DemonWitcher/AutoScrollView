@@ -16,11 +16,9 @@ public class AutoScrollView extends ViewGroup {
     private ArrayList<View> mViewList = new ArrayList<>();
     private AutoScrollAdapter mAdapter;
     private int mShowCount = 5;//最多同时出现view的数量
-    private int mViewCount = mShowCount;
 
     private float mSpeed = 100.0f;//每秒滚动的像素
     private int mChildHeight;
-    private int mCurrentShow;
 
     private int mIndex;
 
@@ -52,10 +50,9 @@ public class AutoScrollView extends ViewGroup {
          */
     }
 
-    public void startScroll() {// 0 0 to -138 -138 | -138 138 to -276 0 | 0 0 to -138 -138
+    public void startScroll() {
         int start = 0;
         int end = -mChildHeight;
-        mCurrentShow++;
         ValueAnimator valueAnimator = new ValueAnimator();
         valueAnimator.setIntValues(start, end);
         valueAnimator.setDuration(getDuration());
@@ -81,7 +78,6 @@ public class AutoScrollView extends ViewGroup {
             @Override
             public void onAnimationEnd(Animator animation) {
                 //到底了就把第一个挪下来然后绑定数据
-//                if (mCurrentShow == mViewCount - 1) {
                     L.i("到底了 复用一个");
                     View topView = mViewList.remove(0);
                     mViewList.add(topView);
@@ -94,15 +90,8 @@ public class AutoScrollView extends ViewGroup {
                     }
                     L.i("bind view mIndex:"+mIndex);
                     mAdapter.bindView(mIndex, topView);//绑定数据 这里还得做判断有没有下一条数据 没有的话就循环回0
-                    //这里会触发一次layout 0,138
                     mIndex++;
-                    mCurrentShow = 0;
-//                    //继续滚动 0 0 to -138 -138 | -138 138 to -276 0 | 0 0 to -138 -138
                     startScroll();
-//                } else {
-//                    L.i("继续滚动");
-//                    startScroll();
-//                }
             }
 
             @Override
@@ -153,7 +142,7 @@ public class AutoScrollView extends ViewGroup {
         mViewList.clear();
         LayoutInflater layoutInflater = LayoutInflater.from(getContext());
         int count = mAdapter.getCount();
-        for (int i = 0; i < mViewCount; ++i) {// 0 1
+        for (int i = 0; i < mShowCount; ++i) {// 0 1
             View view = layoutInflater.inflate(mAdapter.getLayoutId(), this,false);
             addViewInLayout(view,-1,view.getLayoutParams());
             mViewList.add(view);
